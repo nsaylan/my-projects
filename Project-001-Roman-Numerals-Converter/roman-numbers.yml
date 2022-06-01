@@ -39,11 +39,11 @@ Resources:
         yum install python3 -y
         pip3 install flask
         cd /home/ec2-user
-        wget https://raw.githubusercontent.com/XXXXXXX/my-projects/main/aws/projects/Project-001-Roman-Numerals-Converter/app.py
+        wget https://raw.githubusercontent.com/nsaylan/my-projects/main/Project-001-Roman-Numerals-Converter/app.py
         mkdir templates
         cd templates
-        wget https://raw.githubusercontent.com/XXXXXXX/my-projects/main/aws/projects/Project-001-Roman-Numerals-Converter/templates/index.html
-        wget https://raw.githubusercontent.com/XXXXXXXXX/my-projects/main/aws/projects/Project-001-Roman-Numerals-Converter/templates/result.html
+        wget https://raw.githubusercontent.com/nsaylan/my-projects/main/Project-001-Roman-Numerals-Converter/templates/index.html
+        wget https://raw.githubusercontent.com/nsaylan/my-projects/main/Project-001-Roman-Numerals-Converter/templates/result.html
         cd ..
         python3 app.py
       Tags:
@@ -51,3 +51,8 @@ Resources:
           Value: !Sub Web Server of ${AWS::StackName} Stack
   
 Outputs:
+  WebsiteURL:
+    Value: !Sub
+      - http://${PublicAddress}
+      - PublicAddress: !GetAtt WebServerHost.PublicDnsName
+    Description: Roman Numerals Converter Application URL
